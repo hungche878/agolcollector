@@ -26,7 +26,8 @@
 
     <!-- ADDING MODULES -->
     <script>
-        require([ "esri/config", "esri/Map", "esri/views/MapView" ], ( esriConfig, Map, MapView ) => {
+        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate",  "esri/widgets/Search"
+ ], ( esriConfig, Map, MapView, Locate, Search) => {
          
 
          esriConfig.apiKey = "AAPK7376aa81e19047f49d515b880359b35fORHl2lQWZpmaRrOaLHCMcxcMKqhisFhVF-IikMIsLi4VBigmgkhwqrJeNcJmX2dL";
@@ -42,6 +43,24 @@
             map: map,
             center: [120.9820, 23.9739], // longitude, latitude
             zoom: 7 // zoom level
+        });
+
+        const locateBtn = new Locate({
+          view: view
+        });
+
+        // Add the locate widget to the top left corner of the view
+        view.ui.add(locateBtn, {
+          position: "top-left"
+        });
+
+         // Create the search widget and add it to the top right corner of the view
+         var searchWidget = new Search({
+            view: view
+        });
+
+        view.ui.add(searchWidget, {
+            position: "top-right"
         });
     });
 
