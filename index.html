@@ -22,12 +22,32 @@
          height: 100%;
          width: 100%;
         }
+
+      .addRecordBtn {
+        position: absolute;
+        z-index: 10;
+        top: 10px;
+        right: 10px;
+        background-color: #0079c1;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .addRecordBtn:hover {
+        background-color: #005a87;
+      }
+
     </style>
 
     <!-- ADDING MODULES -->
     <script>
-        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate",  "esri/widgets/Search"
- ], ( esriConfig, Map, MapView, Locate, Search) => {
+        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/FeatureLayer"
+ ], ( esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
          
 
          esriConfig.apiKey = "AAPK7376aa81e19047f49d515b880359b35fORHl2lQWZpmaRrOaLHCMcxcMKqhisFhVF-IikMIsLi4VBigmgkhwqrJeNcJmX2dL";
@@ -54,6 +74,14 @@
           position: "top-left"
         });
 
+        // Create featurelayer from feature service 
+        const layer = new FeatureLayer({ 
+        // URL to the service 
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_ec3fb2b3518f49f2921cbe9749af7c5e_results/FeatureServer" //My item URL Goes Here
+        });
+
+        map.add(layer);
+
          // Create the search widget and add it to the top right corner of the view
          var searchWidget = new Search({
             view: view
@@ -70,6 +98,8 @@
   <body>
    <!-- hello world text to check if everything worked -->
    
+    <a href="https://survey123.arcgis.com/surveys/ec3fb2b3518f49f2921cbe9749af7c5e/design"target="_blank" class="addRecordBtn">Add Record</a>
+
     <div id="viewDiv"></div>
 
   </body>
